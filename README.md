@@ -15,6 +15,9 @@
   <a href="https://github.com/twbs/bootstrap/issues/new?template=bug.md">Report bug</a>
   ·
   <a href="https://github.com/twbs/bootstrap/issues/new?template=feature.md&labels=feature">Request feature</a>
+</p>
+
+<p align="center">
   [![Build Status](https://travis-ci.org/0xWiz/domlang.svg?branch=master)](https://travis-ci.org/0xWiz/domlang)
   [![License](https://img.shields.io/github/license/0xWiz/domlang.svg)](https://github.com/0xWiz/Fraction/blob/master/LICENSE)
   [![Version](https://img.shields.io/github/release/0xWiz/domlang.svg)](https://github.com/0xWiz/Fraction/releases/latest)
