@@ -1,10 +1,10 @@
-<p align="center">
-  <a href="https://getbootstrap.com/">
-    <img src="https://getbootstrap.com/docs/4.3/assets/brand/bootstrap-solid.svg" alt="Bootstrap logo" width="72" height="72">
-  </a>
-</p>
+<!--<p align="center">-->
+<!--  <a href="https://getbootstrap.com/">-->
+<!--    <img src="https://getbootstrap.com/docs/4.3/assets/brand/bootstrap-solid.svg" alt="Bootstrap logo" width="72" height="72">-->
+<!--  </a>-->
+<!--</p>-->
 
-<h3 align="center">Bootstrap</h3>
+<h3 align="center">DOMLang JS</h3>
 
 <p align="center">
   A light-weight JavaScript library to building web app easier.
@@ -31,7 +31,7 @@ Add it to your HTML as you would add any JavaScript files.
 - [.attr(key, value)](#dom-method-attr)
 
 
-<h1 id="dom-method-$">$(selector)</h2>
+<h3 id="dom-method-$">$(selector)</h3>
 
 Allows you to create a new `domlang` instance, you can pass the following as argument.
 
@@ -40,7 +40,7 @@ Allows you to create a new `domlang` instance, you can pass the following as arg
 - `Array`       — Add all the elements from the array to the current instance if the element is a HTMLElement.
 
 
-<h1 id="dom-method-append">.append([arguments])</h2>
+<h3 id="dom-method-append">.append([arguments])</h3>
 
 Append HTML element(s) to the selected elements. You can pass the following as argument.
 
@@ -50,7 +50,7 @@ Append HTML element(s) to the selected elements. You can pass the following as a
 - `arguments`   — You can pass all above parameters as arguments. Example : `$("#container").append(element1, element2)`
 
 
-<h1 id="dom-method-append">.attr(key, [value])</h2>
+<h3 id="dom-method-append">.attr(key, [value])</h3>
 
 Get or set HTML element(s) attribute.
 
