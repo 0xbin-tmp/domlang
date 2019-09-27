@@ -24,7 +24,7 @@
 
 ## DOM methods
 
-- [$(selector)](#$(selector))
+- [$(selector)](#core-method-$)
 
 
 ## Quick start
@@ -34,7 +34,7 @@ Clone the github repo `git clone https://github.com/0xWiz/domlang.git` and under
 Add it to your HTML as you would add any JavaScript files.
 
 
-## $(selector)
+<h1 id="core-method-$">$(selector)</h2>
 
 Allows you to create a new `domlang` instance, you can pass the following as argument.
 
