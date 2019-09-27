@@ -28,7 +28,8 @@ Add it to your HTML as you would add any JavaScript files.
 
 - [$(selector)](#dom-method-$)
 - [.append(\[arugments\])](#dom-method-append)
-- [.attr(key, value)](#dom-method-attr)
+- [.attr(key, \[value\])](#dom-method-attr) or [.prop(key, \[value\])](#dom-method-attr)
+- [.bind(event, callback)](#dom-method-bind)
 
 
 <h3 id="dom-method-$">$(selector)</h3>
@@ -50,9 +51,9 @@ Append HTML element(s) to the selected elements. You can pass the following as a
 - `arguments`   — You can pass all above parameters as arguments. Example : `$("#container").append(element1, element2)`
 
 
-<h3 id="dom-method-append">.attr(key, [value])</h3>
+<h3 id="dom-method-attr">.attr(key, [value])</h3>
 
-Get or set HTML element(s) attribute.
+Get or set HTML element(s) attribute. :warning: If key only passed as argument, it will return the first element's attribute.
 
 Example :
 
@@ -61,5 +62,10 @@ $("a").attr("href", "not-found.html");
 
 let action = $("form").attr("action");
 ```
+
+
+<h3 id="dom-method-bind">.bind(event, callback)</h3>
+
+Bind an event listener to selected element(s).
 
 
