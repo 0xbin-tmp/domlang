@@ -18,9 +18,11 @@
 </p>
 
 <p align="center">
+
   [![Build Status](https://travis-ci.org/0xWiz/domlang.svg?branch=master)](https://travis-ci.org/0xWiz/domlang)
   [![License](https://img.shields.io/github/license/0xWiz/domlang.svg)](https://github.com/0xWiz/Fraction/blob/master/LICENSE)
   [![Version](https://img.shields.io/github/release/0xWiz/domlang.svg)](https://github.com/0xWiz/Fraction/releases/latest)
+
 </p>
 
 
