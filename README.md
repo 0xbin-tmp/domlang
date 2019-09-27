@@ -30,6 +30,7 @@ Add it to your HTML as you would add any JavaScript files.
 - [.append(\[arugments\])](#dom-method-append)
 - [.attr(key, \[value\])](#dom-method-attr) or [.prop(key, \[value\])](#dom-method-attr)
 - [.bind(event, callback)](#dom-method-bind)
+- [.children(\[includeTextNodes=false\])](#dom-method-children)
 
 
 <h3 id="dom-method-$">$(selector)</h3>
@@ -66,6 +67,25 @@ let action = $("form").attr("action");
 
 <h3 id="dom-method-bind">.bind(event, callback)</h3>
 
-Bind an event listener to selected element(s).
+Bind an event listener to selected element(s). :information_source: It is a wrapper around `addEventListener` method.
 
+Example :
+
+```
+$("button").bind("click", function() {
+    alert(this.text());
+});
+```
+
+<h3 id="dom-method-children">.children([includeTextNodes=false])</h3>
+
+Get all the children of the first element from the selected elements. Pass `true` as argument to include all the `text` nodes.
+
+Example :
+
+```js
+$("ul").children().each(function(i) {
+  this.text(this.text() + " " + i);
+});
+```
 
