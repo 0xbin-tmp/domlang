@@ -18,23 +18,20 @@
 </p>
 
 
-## Table of contents
-
-- [Quick start](#quick-start)
-
-## DOM methods
-
-- [$(selector)](#core-method-$)
-
-
 ## Quick start
 
 Clone the github repo `git clone https://github.com/0xWiz/domlang.git` and under the `dest` folder, you can find the minified version of the `domalang`
 
 Add it to your HTML as you would add any JavaScript files.
 
+## DOM methods
 
-<h1 id="core-method-$">$(selector)</h2>
+- [$(selector)](#dom-method-$)
+- [.append(\[arugments\])](#dom-method-append)
+- [.attr(key, value)](#dom-method-attr)
+
+
+<h1 id="dom-method-$">$(selector)</h2>
 
 Allows you to create a new `domlang` instance, you can pass the following as argument.
 
@@ -42,5 +39,27 @@ Allows you to create a new `domlang` instance, you can pass the following as arg
 - `HTMLElement` — Add the given HTMLElement to the current instance.
 - `Array`       — Add all the elements from the array to the current instance if the element is a HTMLElement.
 
+
+<h1 id="dom-method-append">.append([arguments])</h2>
+
+Append HTML element(s) to the selected elements. You can pass the following as argument.
+
+- `String`      — Select element(s) from the DOM and append them to the selected elements.
+- `HTMLElement` — Append given HTMLElement to the selected elements.
+- `Array`       — Append all the elements from given array to the selected elements if the array element is a HTML element.
+- `arguments`   — You can pass all above parameters as arguments. Example : `$("#container").append(element1, element2)`
+
+
+<h1 id="dom-method-append">.attr(key, [value])</h2>
+
+Get or set HTML element(s) attribute.
+
+Example :
+
+```js
+$("a").attr("href", "not-found.html");
+
+let action = $("form").attr("action");
+```
 
 
