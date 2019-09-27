@@ -71,7 +71,7 @@ Bind an event listener to selected element(s). :information_source: It is a wrap
 
 Example :
 
-```
+```js
 $("button").bind("click", function() {
     alert(this.text());
 });
