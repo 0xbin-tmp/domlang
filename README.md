@@ -35,9 +35,17 @@ Add it to your HTML as you would add any JavaScript files.
 
 - [$(selector)](#dom-method-$)
 - [.append(\[arugments\])](#dom-method-append)
+- [.also(callback)](#dom-method-also)
 - [.attr(key, \[value\])](#dom-method-attr) or [.prop(key, \[value\])](#dom-method-attr)
 - [.bind(event, callback)](#dom-method-bind)
 - [.children(\[includeTextNodes=false\])](#dom-method-children)
+- [.clear()](#dom-method-clear)
+- [.click(callback)](#dom-method-click)
+- [.css(key, \[value\])](#dom-method-css)
+- [.disable()](#dom-method-disable)
+- [.enable()](#dom-method-enable)
+- [.extend(\[arguments\])](#dom-method-extend)
+- [.isDisabled()](#dom-method-isDisabled)
 
 
 <h3 id="dom-method-$">$(selector)</h3>
@@ -69,6 +77,20 @@ Append HTML element(s) to the selected elements. You can pass the following as a
 ```js
 let span = $("<span>+</span>");
 $("ul li").append(span);
+```
+
+<h3 id="dom-method-append">.also(callback)</h3>
+
+This is method is an utility method. The first selected element will be set to the callback for further processing, and this method will return whatever elements was before this method called.
+
+**Example →**
+
+```js
+$("input[type='username']").also(function() {
+  if (this.isDisabled()) {
+    this.enable();
+  }
+});
 ```
 
 <h3 id="dom-method-attr">.attr(key, [value])</h3>
@@ -108,3 +130,105 @@ $("ul").children().each(function(i) {
 });
 ```
 
+<h3 id="dom-method-clear">.clear()</h3>
+
+Clear all events of selected elements.
+
+**Example →**
+
+```js
+let buttons = $("button").bind("click", function() {
+  alert("hello");
+});
+
+buttons.clear();
+```
+
+<h3 id="dom-method-click">.click(callback)</h3>
+
+Bind a click event to selected elements.
+
+**Example →**
+
+```js
+$("button").click(function() {
+  alert(this.text());
+});
+```
+
+
+<h3 id="dom-method-css">.css(key, [value])</h3>
+
+Add CSS style to selected elements. You can pass the following as first argument.
+
+- `String` — pass the CSS style property as the key and pass the CSS style property value as second argument.
+- `Object` — pass a JavaScript object as the first argument with all the CSS styles as key-value pair.
+
+**Example →**
+
+```js
+let anchors = $("a");
+anchors.css("color", "green");
+anchors.css({
+  textStyle: "none",
+  display: "inline-block",
+  padding: "5px"
+});
+```
+
+
+<h3 id="dom-method-disable">.disable()</h3>
+
+Disable selected form elements.
+
+**Example →**
+
+```js
+$("input[type='username']").disable();
+```
+
+
+<h3 id="dom-method-enable">.enable()</h3>
+
+Enable selected form elements.
+
+**Example →**
+
+```js
+$("input[type='username']").enable();
+```
+
+
+<!--<h3 id="dom-method-extend">.extend([arguments])</h3>-->
+
+<!--Allows you to add more elements to the current instance.. You can pass the following as first argument.-->
+
+<!--- `String` — pass the CSS style property as the key and pass the CSS style property value as second argument.-->
+<!--- `Object` — pass a JavaScript object as the first argument with all the CSS styles as key-value pair.-->
+
+<!--**Example →**-->
+
+<!--```js-->
+<!--let anchors = $("a");-->
+<!--anchors.css("color", "green");-->
+<!--anchors.css({-->
+<!--  textStyle: "none",-->
+<!--  display: "inline-block",-->
+<!--  padding: "5px"-->
+<!--});-->
+<!--```-->
+
+
+<h3 id="dom-method-isDisabled">.isDisabled()</h3>
+
+Check if the first element from selected elements is isDisabled or not.
+
+**Example →**
+
+```js
+$("input[type='username']").also(function() {
+  if (this.isDisabled()) {
+    this.enable();
+  }
+});
+```
