@@ -41,6 +41,12 @@ Allows you to create a new `domlang` instance, you can pass the following as arg
 - `HTMLElement` — Add the given HTMLElement to the current instance.
 - `Array`       — Add all the elements from the array to the current instance if the element is a HTMLElement.
 
+**Example →**
+
+```js
+let buttons = $("button"); 
+```
+
 
 <h3 id="dom-method-append">.append([arguments])</h3>
 
@@ -51,12 +57,18 @@ Append HTML element(s) to the selected elements. You can pass the following as a
 - `Array`       — Append all the elements from given array to the selected elements if the array element is a HTML element.
 - `arguments`   — You can pass all above parameters as arguments. Example : `$("#container").append(element1, element2)`
 
+**Example →**
+
+```js
+let span = $("<span>+</span>");
+$("ul li").append(span);
+```
 
 <h3 id="dom-method-attr">.attr(key, [value])</h3>
 
 Get or set HTML element(s) attribute. :warning: If key only passed as argument, it will return the first element's attribute.
 
-Example :
+**Example →**
 
 ```js
 $("a").attr("href", "not-found.html");
@@ -69,7 +81,7 @@ let action = $("form").attr("action");
 
 Bind an event listener to selected element(s). :information_source: It is a wrapper around `addEventListener` method.
 
-Example :
+**Example →**
 
 ```js
 $("button").bind("click", function() {
@@ -81,7 +93,7 @@ $("button").bind("click", function() {
 
 Get all the children of the first element from the selected elements. Pass `true` as argument to include all the `text` nodes.
 
-Example :
+**Example →**
 
 ```js
 $("ul").children().each(function(i) {
