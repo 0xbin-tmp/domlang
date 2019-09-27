@@ -25,4 +25,4 @@ gulp.task("watch", gulp.series("compile-js", function() {
     gulp.watch(dirs.src, gulp.series("compile-js"));
 }))
 
-gulp.task("default", gulp.series("watch"));
+gulp.task("default", gulp.series("compile-js"));

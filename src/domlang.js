@@ -630,7 +630,7 @@
         each(callback, context) {
             if (context === undefined || context === null) {
                 for (let i = 0; i < this.length; i++) {
-                    callback.call(this[i], i, this);
+                    callback.call($(this[i]), i, this);
                 }
             } else {
                 for (let i = 0; i < this.length; i++) {
@@ -712,6 +712,7 @@
             this.each(function() {
                 $.render(this, s);
             });
+            return this;
         }
         
         html(s) {
