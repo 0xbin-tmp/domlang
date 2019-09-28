@@ -28,7 +28,7 @@
         return JSON.stringify(collec);
     };
     
-    $.toNum = function(s) {
+    $.toNum = $.toNumber = function(s) {
         return Number(s);
     };
     
@@ -67,7 +67,7 @@
         return typeof o === "string";
     };
     
-    $.isNumber = function(num) {
+    $.isNumber = $.isNum = function(num) {
         return typeof num === "number";
     };
     
@@ -122,7 +122,7 @@
         return vals;
     };
     
-    $.contains = function(arr, o) {
+    $.isContains = function(arr, o) {
         let ret = false;
         $.each(arr, function() {
             if($.isSame(this, o)) {
@@ -286,7 +286,7 @@
     };
     
     $.has = function(collec, key) {
-        return $.contains($.keys(collec), key);
+        return $.isContains($.keys(collec), key);
     };
     
     $.each = $.forEach = function(o, callback, context) {
@@ -504,7 +504,7 @@
         if ($.isString(newNode)) {
             let tmp = document.createElement("div");
             tmp.innerHTML = newNode;
-            newNode = tmp;
+            newNode = tmp.children[0];
         }
         
         if ($.isString(oldNode)) {
@@ -576,19 +576,19 @@
                     });
                 } else {
                     $.each(doc.querySelectorAll(sel), function() {
-                        if (!$.contains(self, this)) {
+                        if (!$.isContains(self, this)) {
                             self.push(this);
                         }
                     });
                 }
                 
             } else if ($.isElement(sel)) {
-                if (!$.contains(self, sel)) {
+                if (!$.isContains(self, sel)) {
                     self.push(sel);
                 }
             } else if ($.isIterable(sel)) {
                 $.each(sel, function() {
-                    if ($.isElement(this) && !$.contains(self, this)) self.push(this);
+                    if ($.isElement(this) && !$.isContains(self, this)) self.push(this);
                 });
             }
         }
@@ -598,14 +598,14 @@
                 let sel = arguments[i];
                 
                 if ($.isElement(sel)) {
-                    if (!$.contains(this, sel)) this.push(sel);
+                    if (!$.isContains(this, sel)) this.push(sel);
                 } else if ($.isArray(sel)) {
                     $.each(sel, function(i, el) {
-                        if (!$.contains(this, el)) this.push(el);
+                        if (!$.isContains(this, el)) this.push(el);
                     }, this);
                 } else if (typeof sel === "string") {
                     $.each(doc.querySelectorAll(sel), function(i, el) {
-                        if (!$.contains(this, el)) this.push(el);
+                        if (!$.isContains(this, el)) this.push(el);
                     }, this);
                 }
             }
@@ -644,7 +644,7 @@
                 }
             } else {
                 for (let i = 0; i < this.length; i++) {
-                    callback.call(context, i, this[i], this);
+                    callback.call(context, i, $(this[i]), this);
                 }
             }
             return this;
@@ -885,12 +885,16 @@
             return $(newElements);
         }
         
-        height() {
-            return this[0].offsetHeight;
+        height(val) {
+            if (val === undefined || val === null || !$.isNumber(val)) return this[0].offsetHeight;
+            this.css("height", val + "px");
+            return this;
         }
         
-        width() {
-            return this[0].offsetWidth;
+        width(val) {
+            if (val === undefined || val === null || !$.isNumber(val)) return this[0].offsetWidth;
+            this.css("width", val + "px");
+            return this;
         }
         
         innerHeight() {
@@ -934,14 +938,14 @@
         parents() {
             let ps = [];
             this.each(function() {
-                if (!$.contains(ps, this.parentNode)) {
+                if (!$.isContains(ps, this.parentNode)) {
                     ps.push(this.parentNode);
                 }
             });
             return $(ps);
         }
         
-        rmAttr(key) {
+        removeAttr(key) {
             this.each(function() {
                 this.removeAttribute(key);
             });
