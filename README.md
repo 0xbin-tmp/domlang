@@ -52,6 +52,11 @@ Add it to your HTML as you would add any JavaScript files.
 - [.isDisabled()](#dom-method-isDisabled)
 - [.innerHeight()](#dom-method-innerHeight)
 - [.innerWidth()](#dom-method-innerWidth)
+- [.last()](#dom-method-last)
+- [.on(event, callback)](#dom-method-on)
+- [.parent()](#dom-method-parent)
+- [.parents()](#dom-method-parents)
+- [.prepend(\[arugments\])](#dom-method-prepend)
 
 
 <h3 id="dom-method-$">$(selector)</h3>
@@ -346,4 +351,67 @@ Return the inner width of the first element from selected elements.
 
 ```js
 let insideHeight = $("div#container").innerWidth();
+```
+
+
+<h3 id="dom-method-last">.last()</h3>
+
+Returns a new instance with the last element from current instance.
+
+**Example →**
+
+```js
+let buttons = $("button");
+let lastButton = buttons.last();
+```
+
+
+<h3 id="dom-method-on">.on(event, callback)</h3>
+
+Bind an event listener to selected element(s). :information_source: It is a wrapper around `addEventListener` method.
+
+**Example →**
+
+```js
+$("button").on("click", function() {
+    alert(this.text());
+});
+```
+
+
+<h3 id="dom-method-parent">.parent()</h3>
+
+Return the parent element of the first element from selected elements.
+
+**Example →**
+
+```js
+let form = $("input[name='username']").parent();
+```
+
+<h3 id="dom-method-parents">.parents()</h3>
+
+Return all the parent elements of the selected elements.
+
+**Example →**
+
+```js
+let uls = $("li").parents().filter("ol");
+```
+
+
+<h3 id="dom-method-prepend">.prepend([arguments])</h3>
+
+Prepend HTML element(s) to the selected elements. You can pass the following as argument.
+
+- `String`      — Select element(s) from the DOM and append them to the selected elements.
+- `HTMLElement` — Append given HTMLElement to the selected elements.
+- `Array`       — Append all the elements from given array to the selected elements if the array element is a HTML element.
+- `arguments`   — You can pass all above parameters as arguments. Example : `$("#container").append(element1, element2)`
+
+**Example →**
+
+```js
+let span = $("<span>+</span>");
+$("ul li").prepend(span);
 ```
