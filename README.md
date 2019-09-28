@@ -57,6 +57,8 @@ Add it to your HTML as you would add any JavaScript files.
 - [.parent()](#dom-method-parent)
 - [.parents()](#dom-method-parents)
 - [.prepend(\[arugments\])](#dom-method-prepend)
+- [.removeClass(className)](#dom-method-removeClass)
+- [.render(html)](#dom-method-render)
 
 
 <h3 id="dom-method-$">$(selector)</h3>
@@ -73,9 +75,11 @@ Allows you to create a new `domlang` instance, you can pass the following as arg
 let buttons = $("button"); 
 ```
 
-<h3 id="dom-method-addClass">.addClass([arguments])</h3>
+<h3 id="dom-method-addClass">.addClass(className)</h3>
 
 Add class name to all selected elements. You can add multiple class names by seperating with a space.
+
+**Example →**
 
 ```js
 $("a").addClass("link");
@@ -414,4 +418,43 @@ Prepend HTML element(s) to the selected elements. You can pass the following as 
 ```js
 let span = $("<span>+</span>");
 $("ul li").prepend(span);
+```
+
+
+<h3 id="dom-method-removeClass">.removeClass(className)</h3>
+
+Remove class name to all selected elements. You can add multiple class names by seperating with a space.
+
+**Example →**
+
+```js
+$("a").removeClass("link");
+$("ul").removeClass("list navigation");
+```
+
+
+<h3 id="dom-method-render">.render(className)</h3>
+
+`.render()` is similar to `.html()` but instead of removing all elements and putting the new elements, it compare every element and update the changes only. :information_source: A useful method when you want to update a large HTML content.
+
+**Example →**
+
+```html
+<div id="wrap">
+  <h1>Heading 1</h1>
+  <p>Para 1</p>
+  <p>Para 2</p>
+  <button>Button 1</button>
+</div>
+```
+
+```js
+$("#wrap").render(`
+  <div id="wrap">
+    <h1>Heading 1</h1>
+    <p>Para 1</p>
+    <p>Para 2</p>
+    <button>Button 1</button>
+  </div>
+`);
 ```
