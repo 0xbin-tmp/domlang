@@ -7,7 +7,7 @@
 <h3 align="center">DOMLang JS</h3>
 
 <p align="center">
-  A light-weight JavaScript library to building web app easier.
+  A light-weight JavaScript library to creating web app easier.
   <br>
   <a href="https://getbootstrap.com/docs/4.3/"><strong>Explore domlang docs »</strong></a>
   <br>
@@ -31,6 +31,7 @@ Add it to your HTML as you would add any JavaScript files.
 ## DOM methods
 
 - [$(selector)](#dom-method-$)
+- [.addClass(className)](#dom-method-addClass)
 - [.append(\[arugments\])](#dom-method-append)
 - [.also(callback)](#dom-method-also)
 - [.attr(key, \[value\])](#dom-method-attr) or [.prop(key, \[value\])](#dom-method-attr)
@@ -42,7 +43,15 @@ Add it to your HTML as you would add any JavaScript files.
 - [.disable()](#dom-method-disable)
 - [.enable()](#dom-method-enable)
 - [.extend(\[arguments\])](#dom-method-extend)
+- [.each(callback, \[context\])](#dom-method-each)
+- [.filter(selector)](#dom-method-filter)
+- [.first()](#dom-method-first)
+- [.hide()](#dom-method-hide)
+- [.height(\[height\])](#dom-method-height)
+- [.html(\[html\])](#dom-method-html)
 - [.isDisabled()](#dom-method-isDisabled)
+- [.innerHeight()](#dom-method-innerHeight)
+- [.innerWidth()](#dom-method-innerWidth)
 
 
 <h3 id="dom-method-$">$(selector)</h3>
@@ -57,6 +66,15 @@ Allows you to create a new `domlang` instance, you can pass the following as arg
 
 ```js
 let buttons = $("button"); 
+```
+
+<h3 id="dom-method-addClass">.addClass([arguments])</h3>
+
+Add class name to all selected elements. You can add multiple class names by seperating with a space.
+
+```js
+$("a").addClass("link");
+$("ul").addClass("list navigation");
 ```
 
 
@@ -196,24 +214,103 @@ $("input[type='username']").enable();
 ```
 
 
-<!--<h3 id="dom-method-extend">.extend([arguments])</h3>-->
+<h3 id="dom-method-extend">.extend([arguments])</h3>
 
-<!--Allows you to add more elements to the current instance.. You can pass the following as first argument.-->
+Allows you to add more elements to the current instance. You can pass the following as first argument.
 
-<!--- `String` — pass the CSS style property as the key and pass the CSS style property value as second argument.-->
-<!--- `Object` — pass a JavaScript object as the first argument with all the CSS styles as key-value pair.-->
+- `String`      — Select element(s) from the DOM and append them to the selected elements.
+- `HTMLElement` — Append given HTMLElement to the selected elements.
+- `Array`       — Append all the elements from given array to the selected elements if the array element is a HTML element.
+- `arguments`   — You can pass all above parameters as arguments. Example : `$("#container").extend(element1, element2)`
 
-<!--**Example →**-->
 
-<!--```js-->
-<!--let anchors = $("a");-->
-<!--anchors.css("color", "green");-->
-<!--anchors.css({-->
-<!--  textStyle: "none",-->
-<!--  display: "inline-block",-->
-<!--  padding: "5px"-->
-<!--});-->
-<!--```-->
+**Example →**
+
+```js
+$("ul li").extend("ol li").css("listStyle", "none");
+```
+
+
+<h3 id="dom-method-each">.each(callback, [context])</h3>
+
+Loop through each element from the current instance. if there is no context passed the current element will be used as the context. Callback has 2 arguments if the there is no context or it will have 3 arguments.
+
+**Example →**
+
+```js
+$("input").each(function(index, elements) {
+  if (this.isDisabled()) {
+    this.enable();
+  }
+});
+```
+
+```js
+let navs = ["Home", "About", "Contact"];
+$("a").each(function(element, index, elements) {
+  element.text(this);
+}, navs);
+```
+
+
+<h3 id="dom-method-filter">.filter(selector)</h3>
+
+Remove elements match the given selector from current instance.
+
+**Example →**
+
+```js
+let buttons = $("button, input[type='submit']");
+buttons.disable();
+buttons.filter("button").enable(); // enable input with type submit
+```
+
+
+<h3 id="dom-method-first">.first()</h3>
+
+Returns a new instance with the first element from current instance.
+
+**Example →**
+
+```js
+let buttons = $("button");
+let firstButton = buttons.first();
+```
+
+
+<h3 id="dom-method-hide">.hide()</h3>
+
+Hide all selected elements.
+
+**Example →**
+
+```js
+$("img").hide();
+```
+
+
+<h3 id="dom-method-height">.height([height])</h3>
+
+Return the height of the first element from selected elements. :information_source: It includes border and padding.
+
+**Example →**
+
+```js
+let containerHeight = $("div#container").height();
+$("div#container").height(containerHeight - 20);
+```
+
+
+<h3 id="dom-method-html">.html([html])</h3>
+
+If no argument passed then return the `html` of the first element from selected elements, else set the given HTML to all the selected elements.
+
+**Example →**
+
+```js
+let containerHtml = $("div#container").html();
+$("div#container").html("<h1>I am inside a container</h1>");
+```
 
 
 <h3 id="dom-method-isDisabled">.isDisabled()</h3>
@@ -228,4 +325,25 @@ $("input[type='username']").also(function() {
     this.enable();
   }
 });
+```
+
+<h3 id="dom-method-innerHeight">.innerHeight()</h3>
+
+Return the inner height of the first element from selected elements.
+
+**Example →**
+
+```js
+let insideHeight = $("div#container").innerHeight();
+```
+
+
+<h3 id="dom-method-innerWidth">.innerWidth()</h3>
+
+Return the inner width of the first element from selected elements.
+
+**Example →**
+
+```js
+let insideHeight = $("div#container").innerWidth();
 ```
