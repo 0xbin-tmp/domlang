@@ -30,6 +30,8 @@ Add it to your HTML as you would add any JavaScript files.
 
 ## DOM methods
 
+DOM methods makes DOM manipulation much easier.
+
 - [$(selector)](#dom-method-$)
 - [.addClass(className)](#dom-method-addClass)
 - [.append(\[arugments\])](#dom-method-append)
@@ -70,6 +72,55 @@ Add it to your HTML as you would add any JavaScript files.
 - [.unbind(event)](#dom-method-unbind)
 - [.val(value)](#dom-method-val)
 - [.width(\[width\])](#dom-method-width)
+
+
+## Extension methods
+
+Extension methods will helps to work with large collections and string.
+
+- [$.toObject(jsonString)](#extension-method-toObject)
+- [$.toJson(collection)](#extension-method-toJson)
+- [$.toNum(s)](#extension-method-toNum) or [$.toNumber(s)](#extension-method-toNum)
+- [$.toString(obj)](#extension-method-toString)
+- [$.toArray(collection)](#extension-method-toArray)
+- [$.isArray(obj)](#extension-method-isArray)
+- [$.isElement(obj)](#extension-method-isElement)
+- [$.isString(obj)](#extension-method-isString)
+- [$.isNumber(obj)](#extension-method-isNumber) or [$.isNum(obj)](#extension-method-isNumber)
+- [$.isEmpty(collection)](#extension-method-isEmpty)
+- [$.isEqual(obj1, obj2)](#extension-method-isEqual)
+- [$.isFunction(obj)](#extension-method-isFunction)
+- [$.isLoopable(obj)](#extension-method-isLoopable) or [$.isIterable(obj)](#extension-method-isLoopable)
+- [$.isSame(obj1, obj2)](#extension-method-isSame)
+- [$.escape(s)](#extension-method-escape)
+- [$.unescape(s)](#extension-method-unescape)
+- [$.keys(obj)](#extension-method-keys)
+- [$.values(obj)](#extension-method-values)
+- [$.isContains(arr, obj)](#extension-method-isContains)
+- [$.ready(callback)](#extension-method-ready)
+- [$.random(min, \[max=null\])](#extension-method-random)
+- [$.map(collection, callback, \[context\])](#extension-method-map)
+- [$.reduce(collection, callback, \[context\])](#extension-method-reduce) or [$.foldl(collection, callback, \[context\])](#extension-method-reduce)
+- [$.reduceRight(collection, callback, \[context\])](#extension-method-reduceRight) or [$.foldr(collection, callback, \[context\])](#extension-method-reduceRight)
+- [$.find(collection, callback)](#extension-method-find)
+- [$.filter(arr, callback)](#extension-method-filter)
+- [$.where(arr, obj)](#extension-method-where)
+- [$.reject(arr, callback)](#extension-method-reject)
+- [$.all(array, callback)](#extension-method-all) or [$.every(arr, callback)](#extension-method-all)
+- [$.any(arr, callback)](#extension-method-any) or [$.some(arr, callback)](#extension-method-any)
+- [$.invoke(\[arguments\])](#extension-method-invoke)
+- [$.extend(\[arguments\])](#extension-method-extend)
+- [$.clone(collection)](#extension-method-clone)
+- [$.has(collection, key)](#extension-method-has)
+- [$.each(collection, callback, \[context\])](#extension-method-each) or [$.forEach(collection, callback, \[context\])](#extension-method-each)
+- [$.dropLast(s, [num=1\])](#extension-method-dropLast)
+- [$.dropFirst(s, num=1)](#extension-method-dropFirst)
+- [$.http(url, args)](#extension-method-http)
+- [$.upload(url)](#extension-method-values) :warning:
+- [$.extension(name, callback)](#extension-method-extension)
+- [$.attrs(element)](#extension-method-attrs)
+- [$.render(element, html)](#extension-method-render)
+- [$.plugin(name, callback)](#extension-method-plugin)
 
 
 <h3 id="dom-method-$">$(selector)</h3>
