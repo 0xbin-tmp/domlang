@@ -46,6 +46,7 @@ Add it to your HTML as you would add any JavaScript files.
 - [.each(callback, \[context\])](#dom-method-each)
 - [.filter(selector)](#dom-method-filter)
 - [.first()](#dom-method-first)
+- [.get(index)](#dom-method-get)
 - [.hide()](#dom-method-hide)
 - [.height(\[height\])](#dom-method-height)
 - [.html(\[html\])](#dom-method-html)
@@ -53,12 +54,22 @@ Add it to your HTML as you would add any JavaScript files.
 - [.innerHeight()](#dom-method-innerHeight)
 - [.innerWidth()](#dom-method-innerWidth)
 - [.last()](#dom-method-last)
+- [.offset()](#dom-method-offset)
 - [.on(event, callback)](#dom-method-on)
 - [.parent()](#dom-method-parent)
 - [.parents()](#dom-method-parents)
 - [.prepend(\[arugments\])](#dom-method-prepend)
 - [.removeClass(className)](#dom-method-removeClass)
 - [.render(html)](#dom-method-render)
+- [.remove()](#dom-method-remove)
+- [.removeAttr(key)](#dom-method-removeAttr)
+- [.show()](#dom-method-show)
+- [.siblings()](#dom-method-siblings)
+- [.toggleClass(className)](#dom-method-toggleClass)
+- [.text(s)](#dom-method-text)
+- [.unbind(event)](#dom-method-unbind)
+- [.val(value)](#dom-method-val)
+- [.width(\[width\])](#dom-method-width)
 
 
 <h3 id="dom-method-$">$(selector)</h3>
@@ -287,6 +298,18 @@ let firstButton = buttons.first();
 ```
 
 
+<h3 id="dom-method-get">.get(index)</h3>
+
+Returns a new instance with the given indexed element from current instance.
+
+**Example →**
+
+```js
+let buttons = $("button");
+let secondButton = buttons.get(1);
+```
+
+
 <h3 id="dom-method-hide">.hide()</h3>
 
 Hide all selected elements.
@@ -370,6 +393,18 @@ let lastButton = buttons.last();
 ```
 
 
+<h3 id="dom-method-offset">.offset()</h3>
+
+Return the offset of the first element from selected elements.
+
+**Example →**
+
+```js
+let offset = $("button").offset();
+console.log(offset.top, offset.left);
+```
+
+
 <h3 id="dom-method-on">.on(event, callback)</h3>
 
 Bind an event listener to selected element(s). :information_source: It is a wrapper around `addEventListener` method.
@@ -433,7 +468,7 @@ $("ul").removeClass("list navigation");
 ```
 
 
-<h3 id="dom-method-render">.render(className)</h3>
+<h3 id="dom-method-render">.render(html)</h3>
 
 `.render()` is similar to `.html()` but instead of removing all elements and putting the new elements, it compare every element and update the changes only. :information_source: A useful method when you want to update a large HTML content.
 
@@ -455,6 +490,111 @@ $("#wrap").render(`
     <p>Para 1</p>
     <p>Para 2</p>
     <button>Button 1</button>
+    <button>A new button</button>
   </div>
 `);
+```
+
+In this case the render method will only add the **A new button**.
+
+
+<h3 id="dom-method-remove">.remove()</h3>
+
+Remove all selected elements from the DOM.
+
+**Example →**
+
+```js
+$("p").remove();
+```
+
+<h3 id="dom-method-removeAttr">.removeAttr(key)</h3>
+
+Remove the given attribute from selected elements.
+
+**Example →**
+
+```js
+$("input[data-dummy]").removeAttr("data-dummy");
+```
+
+<h3 id="dom-method-show">.show()</h3>
+
+Make the selected elements visible if they were hidden.
+
+**Example →**
+
+```js
+let buttons = $("button");
+buttons.hide();
+
+setTimeout(function() {
+  buttons.show();
+}, 3000);
+```
+
+<h3 id="dom-method-siblings">.siblings()</h3>
+
+Return the siblings of the first element from selected elements.
+
+**Example →**
+
+```js
+let allListExceptMe = $("ul li").siblings();
+```
+
+<h3 id="dom-method-toggleClass">.toggleClass(className)</h3>
+
+Remove if the class name exist or add if the class name is not.
+
+**Example →**
+
+```js
+$("a.green, a.red, a.active").toggleClass("active");
+```
+
+<h3 id="dom-method-text">.text(s)</h3>
+
+Set text content of the selected elements.
+
+**Example →**
+
+```js
+$("a.notfound").text("Not Found");
+```
+
+<h3 id="dom-method-unbind">.unbind(event)</h3>
+
+Remove an event from selected elements.
+
+**Example →**
+
+```js
+$("input[type='submit']").bind("click", function(e) {
+  e.preventDefault();
+});
+
+$("input[type='submit']").unbind("click");
+```
+
+<h3 id="dom-method-val">.val(value)</h3>
+
+Set the value of the selected form elements.
+
+**Example →**
+
+```js
+$("input").text("The same values");
+```
+
+
+<h3 id="dom-method-width">.width([width])</h3>
+
+Return the width of the first element from selected elements. :information_source: It includes border and padding.
+
+**Example →**
+
+```js
+let containerWidth = $("div#container").width();
+$("div#container").width(containerWidth - 20);
 ```
