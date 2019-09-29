@@ -35,7 +35,7 @@
         
         
         <script type="text/javascript" src=" https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.0/showdown.min.js"></script>
-        <script type="text/javascript" src="build/domlang.js"></script>
+        <script type="text/javascript" src="dest/domlang.min.js"></script>
     
         <script type="text/javascript">
             // var converter = new showdown.Converter();
@@ -43,10 +43,8 @@
             //     $("#view").render(converter.makeHtml(this.val()))
             // });
             
-            let para1 = $("<p>para1</p>")[0];
-            let para2 = $("<p>para2</p>")[0];
             
-            $("#wrap").append(para1, para2);
+            $("#wrap").html("<h1>hello</h1>");
             
         
         </script>

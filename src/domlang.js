@@ -669,23 +669,24 @@
             for (let k = 0; k < arguments.length; k++) {
                 let sel = arguments[k];
                 if ($.isString(sel)) {
-                    $(sel).each(function(i, el) {
-                        this.each(function() {
-                            this.appendChild(el);
-                        });
-                    }, this);
-                } else if ($.isElement(sel)) {
-                    this.each(function() {
-                        this.appendChild(sel);
-                    });
-                } else if ($.isIterable(sel) || $.isArray(sel)) {
-                    $.each(sel, function(i, el) {
-                        if ($.isElement(el)) {
-                            this.each(function() {
-                                this.appendChild(el);
-                            });
+                    let elements = $(sel);
+                    for (let i = 0; i < elements.length; i++) {
+                        for (let j = 0; j < this.length; j++) {
+                            this[j].appendChild(elements[i]);
                         }
-                    }, this);
+                    }
+                } else if ($.isElement(sel)) {
+                    for (let i = 0; i < this.length; i++) {
+                        this[i].appendChild(sel);
+                    }
+                } else if ($.isIterable(sel) || $.isArray(sel)) {
+                    for (let i = 0; i < sel.length; i++) {
+                        if ($.isElement(sel[i])) {
+                            for (let j = 0; j < this.length; j++) {
+                                this[j].appendChild(sel[i]);
+                            }
+                        }
+                    }
                 }
             }
         
@@ -726,16 +727,16 @@
         }
         
         html(s) {
-            this.each(function() {
-                this.innerHTML = s;
-            });
+            for (let i = 0; i < this.length; i++) {
+                this[i].innerHTML = s;   
+            }
             return this;
         }
         
         text(s) {
-            this.each(function() {
-                this.innerHTML = $.escape(s);
-            });
+            for (let i = 0; i < this.length; i++) {
+                this[i].innerHTML = $.escape(s);   
+            }
             return this;
         }
         
