@@ -38,7 +38,7 @@
     
     $.toArray = function(o) {
         const newArray = [];
-        $.each(o, function() {
+        loop(o, function() {
             newArray.push(this);
         });
         return newArray;
@@ -93,7 +93,7 @@
     
     $.escape = function(s) {
         let newS = s;
-        $.each(escapeMap, function(key) {
+        loop(escapeMap, function(key) {
             newS = newS.replace(new RegExp(key, "g"), this);
         });
         return newS;
@@ -101,7 +101,7 @@
     
     $.unescape = function(s) {
         let newS = s;
-        $.each(escapeMap, function(key) {
+        loop(escapeMap, function(key) {
             newS = newS.replace(new RegExp(this, "g"), key);
         });
         return newS;
@@ -124,7 +124,7 @@
     
     $.isContains = function(arr, o) {
         let ret = false;
-        $.each(arr, function() {
+        loop(arr, function() {
             if($.isSame(this, o)) {
                 ret = true;
                 return true;
@@ -240,7 +240,7 @@
     
     $.all = $.every = function(arr, callback) {
         let isAllOk = true;
-        $.each(arr, function(i) {
+        loop(arr, function(i) {
             let ret = callback(i, this, arr);
             if (!ret) {
                 isAllOk = false;
@@ -252,7 +252,7 @@
     
     $.any = $.some = function(arr, callback) {
         let isAllOk = false;
-        $.each(arr, function(i) {
+        loop(arr, function(i) {
             let ret = callback(i, this, arr);
             if (ret) {
                 isAllOk = true;
@@ -360,7 +360,7 @@
         let data = "";
         if ($.has(args, "data")) {
             data += "?";
-            $.each(args.data, function(key) {
+            loop(args.data, function(key) {
                 data += (key + "=" + this + "&")
             });
             
@@ -381,7 +381,7 @@
         }
         
         if ($.has(args, "headers")) {
-            $.each(args.headers, function(key) {
+            loop(args.headers, function(key) {
                 xhr.setRequestHeader(key, this);
             });
         }
@@ -416,7 +416,7 @@
     
     function getAttrs(el) {
         let attrs = {};
-        $.each($.attrs(el), function() {
+        loop($.attrs(el), function() {
             attrs[this] = el.getAttribute(this);
         });
         return attrs;
@@ -466,7 +466,7 @@
                     callback(newChilds[newNodeCount], oldChilds[oldNodeCount], "replace");
                     isUpdated = true;
                 } else {
-                    $.each(oldVDOM.attrs, function(key) {
+                    loop(oldVDOM.attrs, function(key) {
                         if (!$.has(newVDOM.attrs, key) || newVDOM[key] !== oldVDOM[key]) {
                             callback(newChilds[newNodeCount], oldChilds[oldNodeCount], "replace");
                             isUpdated = true;
@@ -559,6 +559,13 @@
             }
         }
     };
+    
+    
+    function loop(arr, callback) {
+        for (let i = 0; i < arr.length; i++) {
+            callback.call(arr[i], i);
+        }
+    }
 
 
 
@@ -571,11 +578,11 @@
                     let el = doc.createElement("div");
                     el.innerHTML = sel;
                     
-                    $.each(el.children, function() {
+                    loop(el.children, function() {
                         self.push(this);
                     });
                 } else {
-                    $.each(doc.querySelectorAll(sel), function() {
+                    loop(doc.querySelectorAll(sel), function() {
                         if (!$.isContains(self, this)) {
                             self.push(this);
                         }
@@ -587,26 +594,27 @@
                     self.push(sel);
                 }
             } else if ($.isIterable(sel)) {
-                $.each(sel, function() {
+                loop(sel, function() {
                     if ($.isElement(this) && !$.isContains(self, this)) self.push(this);
                 });
             }
         }
         
         extend() {
+            let self = this;
             for (let i = 0; i < arguments.length; i++) {
                 let sel = arguments[i];
                 
                 if ($.isElement(sel)) {
                     if (!$.isContains(this, sel)) this.push(sel);
                 } else if ($.isArray(sel)) {
-                    $.each(sel, function(i, el) {
-                        if (!$.isContains(this, el)) this.push(el);
-                    }, this);
+                    loop(sel, function() {
+                        if (!$.isContains(self, this)) self.push(this);
+                    });
                 } else if (typeof sel === "string") {
-                    $.each(doc.querySelectorAll(sel), function(i, el) {
-                        if (!$.isContains(this, el)) this.push(el);
-                    }, this);
+                    loop(doc.querySelectorAll(sel), function() {
+                        if (!$.isContains(self, this)) self.push(this);
+                    });
                 }
             }
             
@@ -615,7 +623,7 @@
         
         addClass(s) {
             let cls = s.split(" ");
-            this.each(function() {
+            loop(this, function() {
                 for (let i = 0; i < cls.length; i++) {
                     this.classList.add(cls[i].trim());
                 }
@@ -625,7 +633,7 @@
         
         removeClass(s) {
             let cls = s.split(" ");
-            this.each(function() {
+            loop(this, function() {
                 for (let i = 0; i < cls.length; i++) {
                     this.classList.remove(cls[i].trim());
                 }
@@ -652,7 +660,7 @@
         
         toggleClass(s) {
             let cls = s.split(" ");
-            this.each(function() {
+            loop(this, function() {
                 for (let i = 0; i < cls.length; i++) {
                     let cl = cls[i].trim();
                     if (this.classList.contains(cl)) {
@@ -694,39 +702,44 @@
         }
         
         prepend() {
+            let self = this;
             for (let k = 0; k < arguments.length; k++) {
                 let sel = arguments[k];
                 if ($.isString(sel)) {
-                    $(sel).each(function(i, el) {
-                        this.each(function() {
+                    loop($(sel), function() {
+                        let el = this;
+                        loop(self, function() {
                             this.insertBefore(el, this.childNodes[0]);
                         });
-                    }, this);
+                    });
                 } else if ($.isElement(sel)) {
-                    this.each(function() {
+                    loop(this, function() {
                         this.insertBefore(sel, this.childNodes[0]);
                     });
                 } else if ($.isIterable(sel)) {
-                    $.each(sel, function(i, el) {
+                    loop(sel, function() {
+                        let el = this;
                         if ($.isElement(el)) {
-                            this.each(function() {
+                            $.each(self, function() {
                                 this.insertBefore(el, this.childNodes[0]);
                             });
                         }
-                    }, this);
+                    });
                 }
             }
             return this;
         }
         
         render(s) {
-            this.each(function() {
+            loop(this, function() {
                 $.render(this, s);
             });
             return this;
         }
         
         html(s) {
+            if (s === undefined || s === null) return this[0].innerHTML;
+            
             for (let i = 0; i < this.length; i++) {
                 this[i].innerHTML = s;   
             }
@@ -734,9 +747,12 @@
         }
         
         text(s) {
+            if (s === undefined || s === null) return this[0].textContent;
+            
             for (let i = 0; i < this.length; i++) {
                 this[i].innerHTML = $.escape(s);   
             }
+            
             return this;
         }
         
@@ -745,7 +761,7 @@
                 return this[0].getAttribute(key);
             }
             
-            this.each(function() {
+            loop(this, function() {
                 this.setAttribute(key, val);
             });
             return this;
@@ -760,7 +776,7 @@
         }
         
         bind(event, callback) {
-            this.each(function() {
+            loop(this, function() {
                 $.eventStack.push({
                     "element": this,
                     "callback": callback,
@@ -775,17 +791,19 @@
         }
         
         unbind(event) {
+            let self = this;
             let toRemoveEvent = [];
-            this.each(function(i, el) {
-                $.each($.eventStack, function(i) {
+            loop(this, function() {
+                let el = this;
+                loop($.eventStack, function(i) {
                     if ($.isSame(el, this["element"]) && event === this["event"]) {
                         el.removeEventListener(event, this["callback"]);
                         toRemoveEvent.push(i);
                     }
                 });
-            }, this);
+            });
             
-            $.each(toRemoveEvent, function() {
+            loop(toRemoveEvent, function() {
                 $.eventStack.splice(this, 1);
             });
             
@@ -794,30 +812,31 @@
         
         clear() {
             let toRemoveEvent = [];
-            this.each(function(i, el) {
-                $.each($.eventStack, function(i) {
+            loop(this, function() {
+                let el = this;
+                loop($.eventStack, function(i) {
                     if ($.isSame(el, this["element"])) {
                         el.removeEventListener(event, this["callback"]);
                         toRemoveEvent.push(i);
                     }
                 });
-            }, this);
+            });
             
-            $.each(toRemoveEvent, function() {
+            loop(toRemoveEvent, function() {
                 $.eventStack.splice(this, 1);
             });
             return this;
         }
         
         disable() {
-            this.each(function() {
+            loop(this, function() {
                 this.disabled = true;
             });
             return this;
         }
         
         enable() {
-            this.each(function() {
+            loop(this, function() {
                 this.disabled = false;
             });
             return this;
@@ -836,14 +855,17 @@
         }
         
         css(style, val) {
+            let self = this;
             if (val === null || val === undefined) {
-                $.each(style, function(key, value) {
-                    this.each(function() {
+                loop($.keys(style), function() {
+                    let key = this;
+                    let value = style[key];
+                    loop(self, function() {
                         this.style[key] = value;
                     });
-                }, this);
+                });
             } else {
-                this.each(function() {
+                loop(this, function() {
                     this.style[style] = val;
                 });
             }
@@ -853,7 +875,7 @@
         siblings() {
             let sibs = [];
             let currentElement = this[0];
-            $.each(currentElement.parentNode.children, function() {
+            loop(currentElement.parentNode.children, function() {
                 if (!$.isSame(this, currentElement)) {
                     sibs.push(this);
                 }
@@ -874,7 +896,7 @@
             let container = doc.createElement("div");
             let newElements = [];
             
-            this.each(function() {
+            loop(this, function() {
                 container.innerHTML = "";
                 container.appendChild(this.cloneNode());
                 
@@ -907,14 +929,14 @@
         }
         
         hide() {
-            this.each(function() {
+            loop(this, function() {
                 this.style.visibility = "hidden";
             });
             return this;
         }
         
         show() {
-            this.each(function() {
+            loop(this, function() {
                 this.style.visibility = "visible";
             });
             return this;
@@ -938,7 +960,7 @@
         
         parents() {
             let ps = [];
-            this.each(function() {
+            loop(this, function() {
                 if (!$.isContains(ps, this.parentNode)) {
                     ps.push(this.parentNode);
                 }
@@ -947,14 +969,14 @@
         }
         
         removeAttr(key) {
-            this.each(function() {
+            loop(this, function() {
                 this.removeAttribute(key);
             });
             return this;
         }
         
         remove() {
-            this.each(function() {
+            loop(this, function() {
                 this.remove();
             });
             
