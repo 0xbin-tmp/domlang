@@ -290,7 +290,18 @@
     };
     
     $.each = $.forEach = function(o, callback, context) {
-        if ($.isIterable(o)) {
+        if ($.isArray(o)) {
+            for (let i = 0; i < o.length; i++) {
+                let ret = false;
+                if (context === undefined || context === null) {
+                    ret = callback.call(o[i], i, o);
+                } else {
+                    ret = callback.call(context, o[i], i, o);
+                }
+                
+                if (ret === true) break;
+            }
+        }else if ($.isIterable(o)) {
             let keys = $.keys(o);
             for (let i = 0; i < keys.length; i++) {
                 let ret = false;
@@ -720,7 +731,7 @@
                     loop(sel, function() {
                         let el = this;
                         if ($.isElement(el)) {
-                            $.each(self, function() {
+                            loop(self, function() {
                                 this.insertBefore(el, this.childNodes[0]);
                             });
                         }
